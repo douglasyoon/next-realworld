@@ -1,7 +1,8 @@
-import { user } from '@/api/userApi';
+import { registerDataType, user } from '@/api/userApi';
 import Button from '@/components/common/Button';
 import ErrorMessages, { ErrorType } from '@/components/common/ErrorMessages';
 import Input from '@/components/common/Input';
+import useAuthData from '@/hooks/useAuthData';
 import { IUserStore, userAtom } from '@/stores/user/atom';
 import { useMutation } from '@tanstack/react-query';
 import Head from 'next/head';
@@ -12,11 +13,11 @@ import { useSetRecoilState } from 'recoil';
 
 const Register = () => {
   const router = useRouter();
-  const [username, setUsername] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
   const [errors, setErrors] = useState<ErrorType>({});
   const setUserStore = useSetRecoilState<IUserStore>(userAtom);
+
+  const { isLogin } = useAuthData();
+  isLogin && router.push('/');
 
   const { isLoading, mutate } = useMutation(user.register, {
     onSuccess: (res) => {
@@ -32,23 +33,15 @@ const Register = () => {
     },
   });
 
-  const onSumbitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const registerData = {
-      username,
-      email,
-      password,
+  const onSumbitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const registerFormData = new FormData(event.currentTarget);
+    const registerData: registerDataType = {
+      username: registerFormData.get('username') as string,
+      email: registerFormData.get('email') as string,
+      password: registerFormData.get('password') as string,
     };
     mutate(registerData);
-  };
-  const onChangeUserName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
-  };
-  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
   };
 
   return (
@@ -73,8 +66,7 @@ const Register = () => {
                     type='text'
                     size='lg'
                     placeholder='Your Name'
-                    value={username}
-                    onChangeEvent={onChangeUserName}
+                    name='username'
                     disabled={isLoading}
                   />
                 </fieldset>
@@ -83,8 +75,7 @@ const Register = () => {
                     type='text'
                     size='lg'
                     placeholder='Email'
-                    value={email}
-                    onChangeEvent={onChangeEmail}
+                    name='email'
                     disabled={isLoading}
                   />
                 </fieldset>
@@ -93,8 +84,7 @@ const Register = () => {
                     type='password'
                     size='lg'
                     placeholder='Password'
-                    value={password}
-                    onChangeEvent={onChangePassword}
+                    name='password'
                     disabled={isLoading}
                   />
                 </fieldset>

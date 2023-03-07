@@ -1,20 +1,18 @@
 import { isAxiosError } from 'axios';
 import apiClient from './apiClient';
-import { registerParams, loginParams, updateParams } from './../types/User';
+import {
+  registerParams,
+  loginParams,
+  updateParams,
+  IUser,
+} from './../types/User';
 
-interface registerData {
-  username: string;
-  email: string;
-  password: string;
-}
+export type registerDataType = Pick<IUser, 'username' | 'email' | 'password'>;
 
-interface loginData {
-  email: string;
-  password: string;
-}
+export type loginDataType = Pick<IUser, 'email' | 'password'>;
 
 export const user = {
-  register: async ({ username, email, password }: registerData) => {
+  register: async ({ username, email, password }: registerDataType) => {
     try {
       const registerData: registerParams = {
         user: {
@@ -31,7 +29,7 @@ export const user = {
       }
     }
   },
-  login: async ({ email, password }: loginData) => {
+  login: async ({ email, password }: loginDataType) => {
     try {
       const loginData: loginParams = {
         user: {
@@ -40,7 +38,7 @@ export const user = {
         },
       };
       const res = await apiClient.post('/users/login', loginData);
-      return res.data;
+      return res;
     } catch (error) {
       if (isAxiosError(error)) {
         return error.response;

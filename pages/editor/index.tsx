@@ -1,6 +1,7 @@
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import Textarea from '@/components/common/Textarea';
+import withAuth from '@/components/common/withAuth';
 
 const EditorCreate = () => {
   return (
@@ -36,4 +37,4 @@ const EditorCreate = () => {
   );
 };
 
-export default EditorCreate;
+export default withAuth(EditorCreate);

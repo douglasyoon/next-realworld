@@ -1,6 +1,7 @@
 import Button from '@/components/common/Button';
 import Input from '@/components/common/Input';
 import Textarea from '@/components/common/Textarea';
+import withAuth from '@/components/common/withAuth';
 
 const Settings = () => {
   return (
@@ -44,4 +45,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default withAuth(Settings);

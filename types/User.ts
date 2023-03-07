@@ -1,4 +1,4 @@
-export interface User {
+export interface IUser {
   email: string;
   password: string;
   username: string;
@@ -7,13 +7,13 @@ export interface User {
 }
 
 export interface registerParams {
-  user: Pick<User, 'username' | 'email' | 'password'>;
+  user: Pick<IUser, 'username' | 'email' | 'password'>;
 }
 
 export interface loginParams {
-  user: Pick<User, 'email' | 'password'>;
+  user: Pick<IUser, 'email' | 'password'>;
 }
 
 export interface updateParams {
-  user: User;
+  user: IUser;
 }
