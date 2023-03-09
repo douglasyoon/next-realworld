@@ -2167,6 +2167,11 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
+use-state-proxy@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/use-state-proxy/-/use-state-proxy-1.1.0.tgz#4f9701eace6a5f692fa79be5c3558d85f2d8df06"
+  integrity sha512-uvtF5Wo8R6bwINSWpDVWky67hJquD6S6bIzsOqd7qFSo68K5ukVdRgNWclmKdM6Dm/2cqIZfjqlbr0hsOGQheA==
+
 use-sync-external-store@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz#7dbefd6ef3fe4e767a0cf5d7287aacfb5846928a"
