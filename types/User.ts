@@ -6,6 +6,14 @@ export interface IUser {
   image: string;
 }
 
+export interface IUserAuth {
+  email: string;
+  username: string;
+  bio: string;
+  image: string;
+  token: string;
+}
+
 export interface registerParams {
   user: Pick<IUser, 'username' | 'email' | 'password'>;
 }

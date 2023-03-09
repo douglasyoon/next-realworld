@@ -1,30 +1,21 @@
+import { IUserAuth } from './../../types/User';
 import { atom, AtomEffect } from 'recoil';
-
-export interface IUserStore {
-  email: string;
-  username: string;
-  bio: string;
-  image: string;
-  token: string;
-}
 
 const localStorageEffect: <T>(key: string) => AtomEffect<T> =
   (key: string) =>
   ({ setSelf, onSet }) => {
-    if (typeof window !== 'undefined') {
-      const savedValue = localStorage.getItem(key);
-      if (savedValue != null) {
-        setSelf(JSON.parse(savedValue));
-      }
-      onSet((newValue, _, isReset) => {
-        isReset
-          ? localStorage.removeItem(key)
-          : localStorage.setItem(key, JSON.stringify(newValue));
-      });
+    const savedValue = localStorage.getItem(key);
+    if (savedValue != null) {
+      setSelf(JSON.parse(savedValue));
     }
+    onSet((newValue, _, isReset) => {
+      isReset
+        ? localStorage.removeItem(key)
+        : localStorage.setItem(key, JSON.stringify(newValue));
+    });
   };
 
-export const userAtom = atom<IUserStore>({
+export const userAtom = atom<IUserAuth>({
   key: 'user',
   default: {
     email: '',
@@ -33,5 +24,5 @@ export const userAtom = atom<IUserStore>({
     image: '',
     token: '',
   },
-  effects: [localStorageEffect<IUserStore>('user')],
+  effects: [localStorageEffect<IUserAuth>('user')],
 });

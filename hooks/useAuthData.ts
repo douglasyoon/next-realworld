@@ -1,8 +1,9 @@
+import { IUserAuth } from './../types/User';
 import { useRecoilValue } from 'recoil';
-import { IUserStore, userAtom } from '@/stores/user/atom';
+import { userAtom } from '@/stores/user/atom';
 
 const useAuthData = () => {
-  const user = useRecoilValue<IUserStore>(userAtom);
+  const user = useRecoilValue<IUserAuth>(userAtom);
   const isLogin = user.token !== '';
   return { user, isLogin };
 };

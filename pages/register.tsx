@@ -3,7 +3,8 @@ import Button from '@/components/common/Button';
 import ErrorMessages, { ErrorType } from '@/components/common/ErrorMessages';
 import Input from '@/components/common/Input';
 import useAuthData from '@/hooks/useAuthData';
-import { IUserStore, userAtom } from '@/stores/user/atom';
+import { userAtom } from '@/stores/user/atom';
+import { IUserAuth } from '@/types/User';
 import { useMutation } from '@tanstack/react-query';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -14,7 +15,7 @@ import { useSetRecoilState } from 'recoil';
 const Register = () => {
   const router = useRouter();
   const [errors, setErrors] = useState<ErrorType>({});
-  const setUserStore = useSetRecoilState<IUserStore>(userAtom);
+  const setUserStore = useSetRecoilState<IUserAuth>(userAtom);
 
   const { isLogin } = useAuthData();
   isLogin && router.push('/');

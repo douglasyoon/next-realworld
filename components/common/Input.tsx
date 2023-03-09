@@ -9,6 +9,7 @@ interface Props {
   value?: string;
   onChangeEvent?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
+  defaultValue?: string;
 }
 
 const Input = ({
@@ -19,6 +20,7 @@ const Input = ({
   value,
   onChangeEvent,
   disabled,
+  defaultValue,
 }: Props) => {
   return (
     <input
@@ -29,6 +31,7 @@ const Input = ({
       value={value}
       onChange={onChangeEvent}
       disabled={disabled}
+      defaultValue={defaultValue}
     />
   );
 };
